@@ -1,6 +1,6 @@
 <template>
-    <div class="good-item">
-        <img :src="goodsItem.show.img" alt="">
+    <div class="good-item" @click="itemClick">
+        <img :src="goodsItem.show.img" alt="" @load="imageLoag">
         <div class="goods-info">
             <p>{{goodsItem.title}}</p>
             <span class="price">{{goodsItem.price}}</span>
@@ -19,6 +19,21 @@
 
         }
       }
+    },
+    methods:{
+      imageLoag(){
+        this.$bus.$emit('itemImageLoad')
+      },
+      itemClick(){
+        this.$router.push('/detail/'+this.goodsItem.iid)
+        // const iid=this.goodsItem.iid;
+        // this.$router.push({
+        //   path:'/detail',
+        //   query: {iid}
+        //
+        // })
+      }
+
     }
   }
 </script>

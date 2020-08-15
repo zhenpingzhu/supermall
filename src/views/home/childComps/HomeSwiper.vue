@@ -2,7 +2,7 @@
     <swiper>
         <swiper-item v-for="item in banners"  :key="item.acm">
             <a :href="item.link">
-                <img :src="item.image" alt="">
+                <img :src="item.image" alt="" @load="imgLoad">
             </a>
         </swiper-item>
     </swiper>
@@ -20,8 +20,22 @@
       banners:{
         type:Array,
         default(){
-          return[]
+          return{
+            isLoad:false
+          }
         }
+      }
+    },
+    data(){
+      return{}
+    },
+    methods:{
+      imgLoad(){
+        if (!this.isLoad){
+          this.$emit('swiperImageLoad')
+          this.isLoad=true
+        }
+
       }
     }
   }
